@@ -4,10 +4,10 @@ class Auth {
   constructor() {
     this.auth0 = new auth0.WebAuth({
       // the following three lines MUST be updated
-      domain: "<YOUR_AUTH0_DOMAIN>", // TODO '<YOUR_AUTH0_DOMAIN>'
-      audience: "https://<YOUR_AUTH0_DOMAIN>/userinfo", // TODO: https://<YOUR_AUTH0_DOMAIN>/userinfo
-      clientID: "<YOUR_AUTH0_CLIENT_ID>", // TODO: '<YOUR_AUTH0_CLIENT_ID>'
-      redirectUri: "http://localhost:3000/callback",
+      domain: process.env.REACT_APP_AUTH0_DOMAIN, // TODO '<YOUR_AUTH0_DOMAIN>'
+      audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo`, // TODO: https://<YOUR_AUTH0_DOMAIN>/userinfo
+      clientID: process.env.REACT_APP_AUTH0_CLIENT_ID, // TODO: '<YOUR_AUTH0_CLIENT_ID>'
+      redirectUri: "https://auth0-started-with-react.herokuapp.com/callback",
       responseType: "id_token",
       scope: "openid profile"
     });
@@ -57,8 +57,8 @@ class Auth {
     this.profile = null;
     this.expiresAt = null;
     this.auth0.logout({
-      returnTo: "http://localhost:3000",
-      clientID: "<YOUR_AUTH0_CLIENT_ID>" // TODO: '<YOUR_AUTH0_CLIENT_ID>
+      returnTo: "https://auth0-started-with-react.herokuapp.com/",
+      clientID: process.env.REACT_APP_AUTH0_CLIENT_ID // TODO: '<YOUR_AUTH0_CLIENT_ID>
     });
   }
 }
