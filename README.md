@@ -48,13 +48,40 @@ Link: File
 
 ## Final step: `npm start`
 
+## Optional: Deploy to Heroku
+
+Let's create our app in Heroku:
+
+``` sh
+heroku create <app-name> --buildpack mars/create-react-app
+```
+
+This will create an app on https://<app-name>.herokuapp.com, make sure to update `Auth.js` redirect uri with this value.
+
+The you'll need to change your code to use environment variables
+- Update `Auth.js` to use:
+  * `process.env.REACT_APP_AUTH0_DOMAIN`
+  * `process.env.REACT_APP_AUTH0_CLIENT_ID`
+
+And create those environment variables in Heroku:
+
+``` sh
+heroku config:set REACT_APP_AUTH0_DOMAIN=<domain>
+heroku config:set REACT_APP_AUTH0_CLIENT_ID=<client-id>
+```
+
+Then, add the uptaded files to git, commit and then deploy by pushing to `heroku master`:
+
+```
+git push heroku master
+```
+
 # Other Info
 
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 
 ### `npm run build`
 
